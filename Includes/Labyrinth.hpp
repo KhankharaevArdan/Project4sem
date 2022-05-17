@@ -17,6 +17,7 @@ enum CellState
 class Cell
 {
     public:
+    Cell();
     int x;
     int y;
     CellState Left;
@@ -25,5 +26,7 @@ class Cell
     CellState Bottom;
     bool Visited;
     void MakeLabyrinth();
+    Cell** labyrinth;
+    ~Cell();
 };
 

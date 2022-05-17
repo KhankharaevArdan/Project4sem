@@ -3,8 +3,8 @@ CFLAGS=-c -Wall -std=c++17 -IIncludes
 
 all: game
 
-game: clean main.o Game.o Objects.o NetWorkServer.o NetWorkClient.o Heroes.o
-	$(CC) main.o Game.o Objects.o NetWorkClient.o NetWorkServer.o Heroes.o -o game -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network
+game: clean main.o Game.o Objects.o NetWorkServer.o NetWorkClient.o Heroes.o DrawLabyrinth.o
+	$(CC) main.o Game.o Objects.o NetWorkClient.o NetWorkServer.o Heroes.o DrawLabyrinth.o -o game -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network
 
 main.o:
 	$(CC) $(CFLAGS) main.cpp
@@ -23,6 +23,9 @@ NetWorkClient.o :
 
 Heroes.o :
 	$(CC) $(CFLAGS) ./Source/Heroes.cpp
+
+DrawLabyrinth.o :
+	$(CC) $(CFLAGS) ./Source/DrawLabyrinth.cpp
 
 clean:
 	rm -rf *.o game

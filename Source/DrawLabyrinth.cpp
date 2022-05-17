@@ -8,13 +8,16 @@ const size_t height = 15;
 
 //void DrawLabyrinth(Cell** labyrinth);
 
-void Cell::MakeLabyrinth()
-{
+Cell::Cell() {
     Cell** labyrinth = (Cell**)malloc(sizeof(Cell*) * width);
     for (int i = 0; i < width; i++)
     {
         labyrinth[i] = (Cell*)malloc(sizeof(Cell) * height);
     }
+}
+
+void Cell::MakeLabyrinth()
+{
     //Cell labyrinth[width][height];
 
     for(int y = 0; y < height; y++)
@@ -88,6 +91,13 @@ void Cell::MakeLabyrinth()
             path.pop();
         }
     }
+}
+
+Cell::~Cell() {
+    for(int i = 0; i < width; ++i) {
+        free(labyrinth[i]);
+    }
+    free(labyrinth);
 }
 
 

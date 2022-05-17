@@ -49,6 +49,8 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
     Hero tank_me{};
     Hero tank_friend{};
     bool update = true;
+    Cell lab;
+
     while(window_->isOpen()) {
         
         sf::Event event;
@@ -108,6 +110,7 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
 
         Client.ReceiveDataFromOpponent(tank_friend);
 
+        DrawMap(lab.labyrinth);
         DrawHero(tank_me, true);
         DrawHero(tank_friend, false);
         window_->display();
@@ -195,7 +198,7 @@ void PixelGameEngine::DrawHero(const Hero& tank, bool me) {
     }
     auto coord = tank.GetCoord();
     rectangle.setPosition(sf::Vector2f(coord.first * 70, coord.second * 70));
-    if(!me) rectangle.setOutlineColor(sf::Color::Red);
+    //if(!me) rectangle.setOutlineColor(sf::Color::Red);
     window_->draw(rectangle);
     
 }
