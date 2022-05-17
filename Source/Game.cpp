@@ -20,7 +20,7 @@ PixelGameEngine::PixelGameEngine() {
     settings.antialiasingLevel = 8;
 
     window_ = new sf::RenderWindow (sf::VideoMode(screen_resolution_x, screen_resolution_y), "", 
-                            sf::Style::Fullscreen, settings);
+                            sf::Style::Default, settings);
 
     window_->setVerticalSyncEnabled(true);
 

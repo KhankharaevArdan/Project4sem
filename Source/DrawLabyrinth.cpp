@@ -94,10 +94,10 @@ void Cell::MakeLabyrinth()
 }
 
 Cell::~Cell() {
-    for(int i = 0; i < width; ++i) {
-        free(labyrinth[i]);
-    }
-    free(labyrinth);
+    // for(int i = 0; i < width; ++i) {
+    //     free(labyrinth[i]);
+    // }
+    // free(labyrinth);
 }
 
 
