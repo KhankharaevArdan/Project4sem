@@ -6,13 +6,13 @@
 #include "Heroes.hpp"
 #include "Labyrinth.hpp"
 
-const int screen_resolution_x = 1920;
+const int screen_resolution_x = 1400;
 const int screen_resolution_y = 1080;
 
-const size_t boundary_width_y = 0;
-const size_t boundary_width_x = 0;
+const size_t boundary_width_y = 1;
+const size_t boundary_width_x = 1;
 const size_t cell_size = 70;
-const size_t width = 38;
+const size_t width = 20;
 const size_t height = 15;
 
 PixelGameEngine::PixelGameEngine() {
@@ -67,8 +67,8 @@ PixelGameEngine::PixelGameEngine() {
 }
 
 void PixelGameEngine::StartGame(NetWorkClient& Client) {
-    Hero tank_me{};
-    Hero tank_friend{};
+    Hero tank_me{1, 1};
+    Hero tank_friend{5, 5};
     bool update = true;
     Labyrinth lab;
 
@@ -158,8 +158,8 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
         }
 
         
-        Client.SendDataToOpponent(tank_me);
-        Client.ReceiveDataFromOpponent(tank_friend);
+        // Client.SendDataToOpponent(tank_me);
+        // Client.ReceiveDataFromOpponent(tank_friend);
 
         DrawMap(lab.labyrinth);
         DrawHero(tank_me, true);

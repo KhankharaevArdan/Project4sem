@@ -13,7 +13,7 @@ enum class Direction {
 
 class Hero {
   public:
-    Hero();
+    Hero(int x, int y);
     void Move(Cell** Labyrinth);
     void ChangeDirection(Direction dir);
     std::pair<int, int> GetCoord() const;

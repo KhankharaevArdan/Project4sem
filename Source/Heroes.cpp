@@ -1,9 +1,9 @@
 #include <Heroes.hpp>
 
-Hero::Hero() {
+Hero::Hero(int x, int y) {
     dir_ = Direction::RIGHT;
-    x_ = 1;
-    y_ = 1;
+    x_ = x;
+    y_ = y;
 }
 
 void Hero::Move(Cell** Labyrinth) {

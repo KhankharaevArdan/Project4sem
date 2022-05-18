@@ -1,6 +1,6 @@
 #include "Labyrinth.hpp"
 
-const size_t width = 38;
+const size_t width = 20;
 const size_t height = 15;
 
 Labyrinth::Labyrinth() {

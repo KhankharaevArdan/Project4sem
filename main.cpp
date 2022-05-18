@@ -20,8 +20,8 @@ int main(int argc, char** argv) {
             //server.ReceiveAndSendData();
          } else if( static_cast<std::string>(argv[1]) == "Client" ) {
             NetWorkClient client;
-            client.Init();
-            client.RegisterOnServer();
+            //client.Init();
+            //client.RegisterOnServer();
             PixelGameEngine Game{};
             Game.StartGame(client);
         }
