@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
             std::cout << server.getIp() << std::endl;
             server.Init();
             server.RegisterNewClients();
-            //server.ReceiveAndSendData();
+            server.ReceiveAndSendData();
          } else if( static_cast<std::string>(argv[1]) == "Client" ) {
             NetWorkClient client;
             client.Init();

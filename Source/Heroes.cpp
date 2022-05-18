@@ -2,29 +2,33 @@
 
 Hero::Hero() {
     dir_ = Direction::RIGHT;
-    x_ = 0;
-    y_ = 0;
+    x_ = 1;
+    y_ = 1;
 }
 
-void Hero::Move() {
-    switch (dir_)
-    {
-    case Direction::UP :
-        ++y_;
-        break;
+void Hero::Move(Cell** Labyrinth) {
     
+    //std::cout << coord.first << " " << coord.second << std::endl;
+    switch (dir_) {
+    case Direction::UP :
+        //if(Labyrinth[coord.first][coord.second].Bottom == Open) 
+            ++y_;
+        break;
     case Direction::RIGHT :
-        ++x_;
+        //if(Labyrinth[coord.first][coord.second].Right == Open) 
+            ++x_;
         break;
     
     case Direction::LEFT :
-        --x_;
+        //if(Labyrinth[coord.first][coord.second].Left == Open)
+            --x_;
         break;
     
     case Direction::DOWN :
-        --y_;
+        //if(Labyrinth[coord.first][coord.second].Bottom == Open)
+            --y_;
         break;
-
+        
     default:
         break;
     }

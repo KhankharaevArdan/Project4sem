@@ -9,8 +9,8 @@
 const int screen_resolution_x = 1920;
 const int screen_resolution_y = 1080;
 
-const size_t boundary_width_y = 18;
-const size_t boundary_width_x = 18;
+const size_t boundary_width_y = 0;
+const size_t boundary_width_x = 0;
 const size_t cell_size = 70;
 const size_t width = 38;
 const size_t height = 15;
@@ -49,47 +49,79 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
     Hero tank_me{};
     Hero tank_friend{};
     bool update = true;
-    Cell lab;
+    Labyrinth lab;
 
     while(window_->isOpen()) {
         
         sf::Event event;
-
+        std::pair<int, int> coord = tank_me.GetCoord();
+        
         while (window_->pollEvent(event)) {
-            
+
             switch (event.type) {
                 case sf::Event::Closed :
                     window_->close();
                     break;
 
                 case sf::Event::KeyPressed :
+                    if(lab.labyrinth[coord.first][coord.second].Top == Open) {
+                        printf("Top:Open\n");
+                    }else {
+                        printf("Top:Closed\n");
+                    }
+
+                    if(lab.labyrinth[coord.first][coord.second].Right == Open) {
+                        printf("Right:Open\n");
+                    }else {
+                        printf("Right:Closed\n");
+                    }
+
+                    if(lab.labyrinth[coord.first][coord.second].Left == Open) {
+                        printf("Left:Open\n");
+                    }else {
+                        printf("Left:Closed\n");
+                    }
+
+                    if(lab.labyrinth[coord.first][coord.second].Bottom == Open) {
+                        printf("Bottom:Open\n");
+                    }else {
+                        printf("Bottom:Closed\n");
+                    }
+                    printf("\n");
                     switch (event.key.code) {
                         case sf::Keyboard::Escape :
                             window_->close();
                             break;
-                    
                         case sf::Keyboard::W :
-                            tank_me.ChangeDirection(Direction::DOWN);
-                            tank_me.Move();
-                            update = true;
+                            if(lab.labyrinth[coord.first][coord.second].Top == Open && lab.labyrinth[coord.first][coord.second - 1].Bottom == Open) {
+                                tank_me.ChangeDirection(Direction::DOWN);
+                                tank_me.Move(lab.labyrinth);
+                                update = true;
+                            }
                             break;
 
                         case sf::Keyboard::D :
-                            tank_me.ChangeDirection(Direction::RIGHT);
-                            tank_me.Move();
-                            update = true;
+                            if(lab.labyrinth[coord.first][coord.second].Right == Open && lab.labyrinth[coord.first + 1][coord.second].Left == Open) {
+                                tank_me.ChangeDirection(Direction::RIGHT);
+                                tank_me.Move(lab.labyrinth);
+                                update = true;
+                            }
                             break;
 
                         case sf::Keyboard::S :
-                            tank_me.ChangeDirection(Direction::UP);
-                            tank_me.Move();
-                            update = true;
+                            if(lab.labyrinth[coord.first][coord.second].Bottom == Open && lab.labyrinth[coord.first][coord.second + 1].Top == Open) {
+                                tank_me.ChangeDirection(Direction::UP);
+                                tank_me.Move(lab.labyrinth);
+                                update = true;
+                            }
                             break;
                         
                         case sf::Keyboard::A :
-                            tank_me.ChangeDirection(Direction::LEFT);
-                            tank_me.Move();
-                            update = true;
+                            if(lab.labyrinth[coord.first][coord.second].Left == Open && lab.labyrinth[coord.first - 1][coord.second].Right == Open) {
+                                tank_me.ChangeDirection(Direction::LEFT);
+                                tank_me.Move(lab.labyrinth);
+                                update = true;
+                            }
                             break;
 
                         default:
@@ -100,14 +132,12 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
                 default:  
                     break;
             }
+            
 
         }
 
-        //if(update) {
-            Client.SendDataToOpponent(tank_me);
-            //update = false;
-        //}
-
+        
+        Client.SendDataToOpponent(tank_me);
         Client.ReceiveDataFromOpponent(tank_friend);
 
         DrawMap(lab.labyrinth);
@@ -148,26 +178,26 @@ void PixelGameEngine::DrawMap(Cell** labyrinth) {
         {
             if(labyrinth[x][y].Top == Close) 
             {
-                wall.at(0).setPosition(cell_size * x + boundary_width_x, cell_size * y + boundary_width_y);
+                wall.at(0).setPosition(cell_size * x, cell_size * y);
                 window_->draw(wall.at(0));
             };
 
             if(labyrinth[x][y].Left == Close)
             {
-                wall.at(1).setPosition(cell_size * x + boundary_width_x, cell_size * y + boundary_width_y);
+                wall.at(1).setPosition(cell_size * x, cell_size * y);
                 window_->draw(wall.at(1));
             }
 
             if(labyrinth[x][y].Right == Close)
             {
-                wall.at(1).setPosition(cell_size * x + cell_size + boundary_width_x, cell_size * y + boundary_width_y);
-                window_->draw(wall.at(0));
+                wall.at(1).setPosition(cell_size * x + cell_size, cell_size * y);
+                window_->draw(wall.at(1));
             }
 
             if(labyrinth[x][y].Bottom == Close)
             {
-                wall.at(0).setPosition(cell_size * x + boundary_width_x, cell_size * y + cell_size + boundary_width_y);
-                window_->draw(wall.at(1));
+                wall.at(0).setPosition(cell_size * x, cell_size * y + cell_size);
+                window_->draw(wall.at(0));
             }
         }
     }

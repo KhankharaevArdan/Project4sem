@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <utility>
 
+#include "Labyrinth.hpp"
+
 enum class Direction {
     UP,
     DOWN,
@@ -12,7 +14,7 @@ enum class Direction {
 class Hero {
   public:
     Hero();
-    void Move();
+    void Move(Cell** Labyrinth);
     void ChangeDirection(Direction dir);
     std::pair<int, int> GetCoord() const;
     Direction GetDirection() const;

@@ -1,33 +1,27 @@
 #include "Labyrinth.hpp"
 
-const size_t boundary_width_y = 18;
-const size_t boundary_width_x = 18;
-const size_t cell_size = 70;
 const size_t width = 38;
 const size_t height = 15;
 
-//void DrawLabyrinth(Cell** labyrinth);
-
-Cell::Cell() {
-    Cell** labyrinth = (Cell**)malloc(sizeof(Cell*) * width);
-    for (int i = 0; i < width; i++)
-    {
+Labyrinth::Labyrinth() {
+    labyrinth = (Cell**)malloc(sizeof(Cell*) * width);
+    for(int i = 0; i < width; ++i) {
         labyrinth[i] = (Cell*)malloc(sizeof(Cell) * height);
     }
+    MakeLabyrinth();
 }
 
-void Cell::MakeLabyrinth()
+void Labyrinth::MakeLabyrinth()
 {
-    //Cell labyrinth[width][height];
-
-    for(int y = 0; y < height; y++)
+    
+    for(int y = 0; y < height; y++) {
         for(int x = 0; x < width; x++)
         {
             labyrinth[x][y].x = x;
             labyrinth[x][y].y = y;
             labyrinth[x][y].Visited = false;
         }
-
+    }
     srand(time(NULL));
     int startX = 0;
     int startY = 0;
@@ -84,7 +78,6 @@ void Cell::MakeLabyrinth()
 
             labyrinth[next.x][next.y].Visited = true;
             path.push(next);
-
         }
         else
         {
@@ -93,11 +86,12 @@ void Cell::MakeLabyrinth()
     }
 }
 
-Cell::~Cell() {
-    // for(int i = 0; i < width; ++i) {
-    //     free(labyrinth[i]);
-    // }
-    // free(labyrinth);
+Labyrinth::~Labyrinth() {
+    for(int i = 0; i < width; ++i) {
+        free(labyrinth[i]);
+    }
+    free(labyrinth);
 }
+
 
 

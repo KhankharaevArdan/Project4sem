@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++17 -IIncludes
+CFLAGS=-c -std=c++17 -IIncludes
 
 all: game
 

@@ -14,10 +14,10 @@ enum CellState
     Open 
 };
 
-class Cell
-{
-    public:
-    Cell();
+
+class Cell {
+public:
+
     int x;
     int y;
     CellState Left;
@@ -25,8 +25,14 @@ class Cell
     CellState Top;
     CellState Bottom;
     bool Visited;
-    void MakeLabyrinth();
+    
+};
+
+class Labyrinth {
+public:
+    Labyrinth();
     Cell** labyrinth;
-    ~Cell();
+    void MakeLabyrinth();
+    ~Labyrinth();
 };
 
