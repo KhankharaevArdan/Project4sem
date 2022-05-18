@@ -93,35 +93,35 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
                             window_->close();
                             break;
                         case sf::Keyboard::W :
-                            if(lab.labyrinth[coord.first][coord.second].Top == Open && lab.labyrinth[coord.first][coord.second - 1].Bottom == Open) {
+                            //if(lab.labyrinth[coord.first][coord.second].Top == Open && lab.labyrinth[coord.first][coord.second - 1].Bottom == Open) {
                                 tank_me.ChangeDirection(Direction::DOWN);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            }
+                            //}
                             break;
 
                         case sf::Keyboard::D :
-                            if(lab.labyrinth[coord.first][coord.second].Right == Open && lab.labyrinth[coord.first + 1][coord.second].Left == Open) {
+                            //if(lab.labyrinth[coord.first][coord.second].Right == Open && lab.labyrinth[coord.first + 1][coord.second].Left == Open) {
                                 tank_me.ChangeDirection(Direction::RIGHT);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            }
+                            //}
                             break;
 
                         case sf::Keyboard::S :
-                            if(lab.labyrinth[coord.first][coord.second].Bottom == Open && lab.labyrinth[coord.first][coord.second + 1].Top == Open) {
+                            //if(lab.labyrinth[coord.first][coord.second].Bottom == Open && lab.labyrinth[coord.first][coord.second + 1].Top == Open) {
                                 tank_me.ChangeDirection(Direction::UP);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            }
+                            //}
                             break;
                         
                         case sf::Keyboard::A :
-                            if(lab.labyrinth[coord.first][coord.second].Left == Open && lab.labyrinth[coord.first - 1][coord.second].Right == Open) {
+                            //if(lab.labyrinth[coord.first][coord.second].Left == Open && lab.labyrinth[coord.first - 1][coord.second].Right == Open) {
                                 tank_me.ChangeDirection(Direction::LEFT);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            }
+                            //}
                             break;
 
                         default:
