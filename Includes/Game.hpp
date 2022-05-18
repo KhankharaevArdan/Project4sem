@@ -19,6 +19,11 @@ class PixelGameEngine {
       sf::Texture texture_tank_down_;
       sf::Texture texture_tank_left_;
 
+      sf::Texture texture_tank_opponent_right_;
+      sf::Texture texture_tank_opponent_up_;
+      sf::Texture texture_tank_opponent_down_;
+      sf::Texture texture_tank_opponent_left_;
+
     sf::RenderWindow* window_;
 
 };

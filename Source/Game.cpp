@@ -43,6 +43,27 @@ PixelGameEngine::PixelGameEngine() {
         exit(-1);
     }
     texture_tank_down_.setSmooth(true);
+
+
+    if(!texture_tank_opponent_right_.loadFromFile("Images/TankOpponentRight.png")) {
+        exit(-1);
+    }
+    texture_tank_opponent_right_.setSmooth(true);
+
+    if(!texture_tank_opponent_left_.loadFromFile("Images/TankOpponentLeft.png")) {
+        exit(-1);
+    }
+    texture_tank_opponent_left_.setSmooth(true);
+
+    if(!texture_tank_opponent_up_.loadFromFile("Images/TankOpponentDown.png")) {
+        exit(-1);
+    }
+    texture_tank_opponent_up_.setSmooth(true);
+
+    if(!texture_tank_opponent_down_.loadFromFile("Images/TankOpponentUp.png")) {
+        exit(-1);
+    }
+    texture_tank_opponent_down_.setSmooth(true);
 }
 
 void PixelGameEngine::StartGame(NetWorkClient& Client) {
@@ -64,64 +85,64 @@ void PixelGameEngine::StartGame(NetWorkClient& Client) {
                     break;
 
                 case sf::Event::KeyPressed :
-                    if(lab.labyrinth[coord.first][coord.second].Top == Open) {
-                        printf("Top:Open\n");
-                    }else {
-                        printf("Top:Closed\n");
-                    }
+                    // if(lab.labyrinth[coord.first][coord.second].Top == Open) {
+                    //     printf("Top:Open\n");
+                    // }else {
+                    //     printf("Top:Closed\n");
+                    // }
 
-                    if(lab.labyrinth[coord.first][coord.second].Right == Open) {
-                        printf("Right:Open\n");
-                    }else {
-                        printf("Right:Closed\n");
-                    }
+                    // if(lab.labyrinth[coord.first][coord.second].Right == Open) {
+                    //     printf("Right:Open\n");
+                    // }else {
+                    //     printf("Right:Closed\n");
+                    // }
 
-                    if(lab.labyrinth[coord.first][coord.second].Left == Open) {
-                        printf("Left:Open\n");
-                    }else {
-                        printf("Left:Closed\n");
-                    }
+                    // if(lab.labyrinth[coord.first][coord.second].Left == Open) {
+                    //     printf("Left:Open\n");
+                    // }else {
+                    //     printf("Left:Closed\n");
+                    // }
 
-                    if(lab.labyrinth[coord.first][coord.second].Bottom == Open) {
-                        printf("Bottom:Open\n");
-                    }else {
-                        printf("Bottom:Closed\n");
-                    }
-                    printf("\n");
+                    // if(lab.labyrinth[coord.first][coord.second].Bottom == Open) {
+                    //     printf("Bottom:Open\n");
+                    // }else {
+                    //     printf("Bottom:Closed\n");
+                    // }
+                    // printf("\n");
                     switch (event.key.code) {
                         case sf::Keyboard::Escape :
                             window_->close();
                             break;
                         case sf::Keyboard::W :
-                            //if(lab.labyrinth[coord.first][coord.second].Top == Open && lab.labyrinth[coord.first][coord.second - 1].Bottom == Open) {
+                            if(lab.labyrinth[coord.first][coord.second].Top == Open && lab.labyrinth[coord.first][coord.second - 1].Bottom == Open) {
                                 tank_me.ChangeDirection(Direction::DOWN);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            //}
+                            }
                             break;
 
                         case sf::Keyboard::D :
-                            //if(lab.labyrinth[coord.first][coord.second].Right == Open && lab.labyrinth[coord.first + 1][coord.second].Left == Open) {
+                            if(lab.labyrinth[coord.first][coord.second].Right == Open && lab.labyrinth[coord.first + 1][coord.second].Left == Open) {
                                 tank_me.ChangeDirection(Direction::RIGHT);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            //}
+                            }
                             break;
 
                         case sf::Keyboard::S :
-                            //if(lab.labyrinth[coord.first][coord.second].Bottom == Open && lab.labyrinth[coord.first][coord.second + 1].Top == Open) {
+                            if(lab.labyrinth[coord.first][coord.second].Bottom == Open && lab.labyrinth[coord.first][coord.second + 1].Top == Open) {
                                 tank_me.ChangeDirection(Direction::UP);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            //}
+                            }
                             break;
                         
                         case sf::Keyboard::A :
-                            //if(lab.labyrinth[coord.first][coord.second].Left == Open && lab.labyrinth[coord.first - 1][coord.second].Right == Open) {
+                            if(lab.labyrinth[coord.first][coord.second].Left == Open && lab.labyrinth[coord.first - 1][coord.second].Right == Open) {
                                 tank_me.ChangeDirection(Direction::LEFT);
                                 tank_me.Move(lab.labyrinth);
                                 update = true;
-                            //}
+                            }
                             break;
 
                         default:
@@ -208,19 +229,19 @@ void PixelGameEngine::DrawHero(const Hero& tank, bool me) {
 
     switch (tank.GetDirection()) {
             case Direction::UP :
-                rectangle.setTexture(&texture_tank_up_);
+                me ? rectangle.setTexture(&texture_tank_up_) : rectangle.setTexture(&texture_tank_opponent_up_);
                 break;
 
             case Direction::DOWN :
-                rectangle.setTexture(&texture_tank_down_);
+                me ? rectangle.setTexture(&texture_tank_down_) : rectangle.setTexture(&texture_tank_opponent_down_);
                 break;
 
             case Direction::LEFT :
-                rectangle.setTexture(&texture_tank_left_);
+                me ? rectangle.setTexture(&texture_tank_left_) : rectangle.setTexture(&texture_tank_opponent_left_);
                 break;
 
             case Direction::RIGHT :
-                rectangle.setTexture(&texture_tank_right_);
+                me ? rectangle.setTexture(&texture_tank_right_) : rectangle.setTexture(&texture_tank_opponent_right_);
                 break;
             
             default:

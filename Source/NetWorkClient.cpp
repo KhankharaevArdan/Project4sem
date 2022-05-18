@@ -43,7 +43,7 @@ sf::Socket::Status NetWorkClient::SendRegisterClientData() {
     if(reg_socket_.send(packet) == sf::Socket::Status::Done) {
         std::cout << "SendRegisterClientData() : Successfully" << std::endl;
     }else {
-        std::cout << "Failed to send client data" << std::endl;
+        //std::cout << "Failed to send client data" << std::endl;
         return sf::Socket::Status::Error;
     }
     packet_.clear();
